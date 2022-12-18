@@ -22,16 +22,21 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'software.amazon.awssdk:aws-sdk-java:2.18.25'
+    implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
+    implementation 'net.leodb.dynamodb:dynamodb-data:1.0.21'
+    implementation 'com.jcabi:DynamoDBLocal:2015-07-16'
+    implementation 'io.github.normandesjr:prefix-dynamodb-mapper:0.1.1'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     // Added for AWS Lambda Functions
-    implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
-    implementation 'com.amazonaws:aws-java-sdk-s3'
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
-    implementation 'com.amazonaws:aws-lambda-java-events:2.2.9'
-    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.12.364')
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.364'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.2'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.5.1'
+
 
 
 
