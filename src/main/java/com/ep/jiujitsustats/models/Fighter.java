@@ -5,6 +5,7 @@ import com.ep.jiujitsustats.enums.Belt;
 import java.util.Objects;
 
 public class Fighter {
+
     private String name;
     private int age;
     private int weight;
