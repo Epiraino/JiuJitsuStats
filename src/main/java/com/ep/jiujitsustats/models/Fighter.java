@@ -1,12 +1,17 @@
 package com.ep.jiujitsustats.models;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMarshalling;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.ep.jiujitsustats.enums.Belt;
 
 import java.util.Objects;
+import java.util.UUID;
+
 @DynamoDBTable(tableName = "Fighters")
 public class Fighter {
 
+    private String userId;
     private String name;
     private int age;
     private int weight;
@@ -16,12 +21,21 @@ public class Fighter {
 
 
     public Fighter(String name, int age, int weight, Belt belt) {
+        this.userId = UUID.randomUUID().toString();
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.belt = belt;
     }
+    @DynamoDBHashKey(attributeName = "UserId")
+    public String getUserId() {
+        return userId;
+    }
 
+
+
+
+@DynamoDBHashKey(attributeName = "Name")
     public String getName() {
         return name;
     }
