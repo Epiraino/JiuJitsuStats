@@ -8,6 +8,12 @@ import com.ep.jiujitsustats.enums.Belt;
 import java.util.Objects;
 import java.util.UUID;
 
+/*
+        ADD ENUM OF SUBMISSION FINISHES
+        CREATE WIN CLASS TO STORE STATS OF FIGHT
+        FIGHTER PROFILE WILL HAVE LISTS OF WINS AND LISTS OF LOSSES
+        
+ */
 @DynamoDBTable(tableName = "Fighters")
 public class Fighter {
 
@@ -19,7 +25,9 @@ public class Fighter {
     private int wins;
     private int losses;
 
+/*
 
+ */
     public Fighter(String name, int age, int weight, Belt belt) {
         this.userId = UUID.randomUUID().toString();
         this.name = name;
