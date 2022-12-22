@@ -1,36 +1,34 @@
 package com.ep.jiujitsustats.controllers;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.ep.jiujitsustats.enums.Belt;
-import com.ep.jiujitsustats.models.Fighter;
-import com.ep.jiujitsustats.services.FighterService;
+import com.ep.jiujitsustats.dao.models.Fighter;
+import com.ep.jiujitsustats.repos.FighterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(path = "api/v1/fighters")
+@RequestMapping(path = "api/v1/fighters",method = { RequestMethod.GET, RequestMethod.POST })
 public class FighterController {
     private final FighterService fighterService;
-    private final DynamoDBMapper dynamoDBMapper;
+
     @Autowired
-    public FighterController(FighterService fighterService, DynamoDBMapper dynamoDBMapper) {
+    public FighterController(FighterService fighterService) {
         this.fighterService = fighterService;
-        this.dynamoDBMapper = dynamoDBMapper;
     }
 
 
 
 
 
-    @GetMapping
-    public List<Fighter> getFighters(){
-        return fighterService.getFighters();
+//    @GetMapping
+//    public List<Fighter> getFighter(){
+//
+//        return fighterService.getFighters();
+//    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Fighter> createFighter(@RequestBody Fighter fighter){
+        return ResponseEntity.ok(fighterService.createFighter(fighter));
     }
 }

@@ -1,12 +1,19 @@
-package com.ep.jiujitsustats.models;
+package com.ep.jiujitsustats.dao.models;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMarshalling;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.ep.jiujitsustats.enums.Belt;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /*
         ADD ENUM OF SUBMISSION FINISHES
@@ -14,36 +21,50 @@ import java.util.UUID;
         FIGHTER PROFILE WILL HAVE LISTS OF WINS AND LISTS OF LOSSES
         
  */
-@DynamoDBTable(tableName = "Fighters")
+@DynamoDbBean
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Fighter {
 
+
     private String userId;
+
     private String name;
+
     private int age;
+
     private int weight;
+
     private Belt belt;
+
     private int wins;
+
     private int losses;
 
 /*
 
  */
-    public Fighter(String name, int age, int weight, Belt belt) {
-        this.userId = UUID.randomUUID().toString();
+
+    public Fighter() {
+    }
+
+    public Fighter(String userId, String name, int age, int weight) {
+        this.userId = userId;
         this.name = name;
         this.age = age;
         this.weight = weight;
-        this.belt = belt;
     }
-    @DynamoDBHashKey(attributeName = "UserId")
+    @DynamoDbPartitionKey
+    @DynamoDbAttribute("userId")
     public String getUserId() {
         return userId;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-
-
-@DynamoDBHashKey(attributeName = "Name")
+    @DynamoDbSortKey
+    @DynamoDbAttribute("name")
     public String getName() {
         return name;
     }
